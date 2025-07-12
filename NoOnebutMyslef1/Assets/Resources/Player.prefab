@@ -35,8 +35,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 873470057056202685}
   - {fileID: 2905458403364092855}
@@ -177,7 +177,7 @@ MonoBehaviour:
   playerBody: {fileID: 5081331567427627971}
   camHolder: {fileID: 2905458403364092855}
   playerCamera: {fileID: 6700346104232431419}
-  sensitivity: 2
+  sensitivity: 0.8
   maxPitch: 80
 --- !u!114 &5159247348204615094
 MonoBehaviour:

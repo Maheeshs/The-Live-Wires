@@ -406,6 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1310ea1e87f3884f881fbbf2eac8843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelName: Mall_Map_Small
 --- !u!4 &973160853
 Transform:
   m_ObjectHideFlags: 0

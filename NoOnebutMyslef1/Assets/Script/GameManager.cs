@@ -5,6 +5,7 @@ using Photon.Pun;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    public string LevelName="Demo";
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Demo");
+        PhotonNetwork.LoadLevel(LevelName);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
