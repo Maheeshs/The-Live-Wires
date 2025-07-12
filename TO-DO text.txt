@@ -1,0 +1,11 @@
+me : Refine Map
+Tell you what to do
+
+you : 
+ 
+Player Jitteriness
+Bullet Invisible
+If Possible - Splitscreen
+Transparency Shader on Player and gun
+
+Two Powerup Weapons - RPG(3 uses), Sword(10 uses)
