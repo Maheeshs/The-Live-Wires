@@ -2763,6 +2763,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4767538273198306119, guid: bf1e0b33559d713439adf1032e63328b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: f1e524e2d4f82914c888662a91155eae,
+        type: 2}
     - target: {fileID: 4980917341267111847, guid: bf1e0b33559d713439adf1032e63328b,
         type: 3}
       propertyPath: sceneViewId
@@ -2817,6 +2823,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175511092802186130, guid: bf1e0b33559d713439adf1032e63328b,
+        type: 3}
+      propertyPath: maxPitch
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175511092802186130, guid: bf1e0b33559d713439adf1032e63328b,
+        type: 3}
+      propertyPath: sensitivity
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

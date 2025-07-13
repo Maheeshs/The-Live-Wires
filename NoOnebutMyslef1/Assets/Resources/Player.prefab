@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 4704113766047597800, guid: 6a48a34bb7617cd4889049fe766da907, type: 3}
-  bulletForce: 200
+  bulletForce: 20
   BulletSpawnpoint: {fileID: 6992345956185749742}
   maxAmmo: 3
   reloadTime: 2

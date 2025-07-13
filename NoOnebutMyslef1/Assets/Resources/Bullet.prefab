@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2287152022531187155}
   - component: {fileID: 799183621700131304}
   - component: {fileID: 4953328682623921663}
+  - component: {fileID: 2915023035991008737}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -149,3 +150,26 @@ MonoBehaviour:
   groundHit: 0
   hitEffectPrefab: {fileID: 3455946795491873049, guid: 261f27e645ac3d149a96ed555b6c4387,
     type: 3}
+  bulletForce: 20
+--- !u!114 &2915023035991008737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4704113766047597800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

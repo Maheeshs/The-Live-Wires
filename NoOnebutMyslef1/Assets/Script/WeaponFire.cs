@@ -5,8 +5,8 @@ using Photon.Pun;
 
 public class WeaponFire : MonoBehaviourPun
 {
-    public GameObject Bullet;
-    public float bulletForce = 500f;
+    public GameObject Bullet; // Make sure this prefab is in a Resources folder
+    public float bulletForce = 20f;
     public Transform BulletSpawnpoint;
 
     public int maxAmmo = 3;
@@ -19,7 +19,6 @@ public class WeaponFire : MonoBehaviourPun
         currentAmmo = maxAmmo;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!photonView.IsMine || isReloading)
@@ -42,14 +41,13 @@ public class WeaponFire : MonoBehaviourPun
 
     void Shoot()
     {
-        GameObject bullet = Instantiate(Bullet, BulletSpawnpoint.position, BulletSpawnpoint.rotation);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.AddForce(BulletSpawnpoint.forward * bulletForce);
-        }
-        Destroy(bullet,2f);
+        GameObject bullet = PhotonNetwork.Instantiate("Bullet", BulletSpawnpoint.position, BulletSpawnpoint.rotation);
+
+        // Send direction data via RPC to set velocity on all clients
+        Vector3 shootDirection = BulletSpawnpoint.forward; // or forward depending on your setup
+        bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.All, shootDirection);
     }
+
     IEnumerator Reload()
     {
         isReloading = true;
