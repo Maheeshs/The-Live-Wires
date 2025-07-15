@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2.5
   maxDamage: 50
-  duration: 5
+  duration: 1.5
   explosionForce: 500
 --- !u!1001 &3023467593977587553
 PrefabInstance:
