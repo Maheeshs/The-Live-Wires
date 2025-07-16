@@ -1,9 +1,10 @@
 using Photon.Pun;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviourPun
+public class RPGbullet : MonoBehaviour
 {
-    public int groundHit = 0;
     public GameObject hitEffectPrefab;
     public float bulletForce = 20f;
     public LayerMask HitableLayers;
@@ -24,22 +25,15 @@ public class Bullet : MonoBehaviourPun
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (groundHit == 2)
-        {
-            Destroy(gameObject);
-            SpawnHitEffect();
-            Debug.Log("gameObj destroy");
-        }
-    }
+   
 
     private void OnCollisionEnter(Collision collision)
     {
         if (((1 << collision.gameObject.layer) & HitableLayers) != 0)
         {
-            groundHit++;
-            Debug.Log("ground hit=" + groundHit);
+            SpawnHitEffect();
+            Destroy(gameObject);
+            Debug.Log("RPG HIT");
         }
 
         if (collision.gameObject.CompareTag("Player"))

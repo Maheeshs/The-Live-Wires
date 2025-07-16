@@ -1,41 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponFire : MonoBehaviourPun
 {
-    public GameObject Bullet; // Make sure this prefab is in a Resources folder
-    public float bulletForce = 20f;
+    public GameObject Bullet; // Must be in a "Resources" folder
     public Transform BulletSpawnpoint;
+    public float bulletForce = 20f;
 
     public int maxAmmo = 3;
     private int currentAmmo;
     public float reloadTime = 2f;
     private bool isReloading = false;
 
+    private PlayerControls controls;
+
+    private void Awake()
+    {
+        controls = new PlayerControls();
+        controls.Player.Attack.performed += ctx => OnAttack();
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
     void Start()
     {
         currentAmmo = maxAmmo;
     }
 
-    void Update()
+    void OnAttack()
     {
         if (!photonView.IsMine || isReloading)
             return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (currentAmmo > 0)
         {
-            if (currentAmmo > 0)
-            {
-                Shoot();
-                currentAmmo--;
+            Shoot();
+            currentAmmo--;
 
-                if (currentAmmo == 0)
-                {
-                    StartCoroutine(Reload());
-                }
-            }
+            if (currentAmmo == 0)
+                StartCoroutine(Reload());
         }
     }
 
@@ -43,8 +56,7 @@ public class WeaponFire : MonoBehaviourPun
     {
         GameObject bullet = PhotonNetwork.Instantiate("Bullet", BulletSpawnpoint.position, BulletSpawnpoint.rotation);
 
-        // Send direction data via RPC to set velocity on all clients
-        Vector3 shootDirection = BulletSpawnpoint.forward; // or forward depending on your setup
+        Vector3 shootDirection = BulletSpawnpoint.forward;
         bullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.All, shootDirection);
     }
 

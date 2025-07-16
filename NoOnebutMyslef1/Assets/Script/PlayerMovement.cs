@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviourPun
     
 
 
+
     void Update()
     {
         if (!photonView.IsMine) return;

@@ -1122,8 +1122,8 @@
     "m_ObjectId": "18b128b32c4f49c08722556bf2e308d4",
     "m_Title": "Fire Color",
     "m_Position": {
-        "x": 10.0,
-        "y": 10.0
+        "x": -2760.0,
+        "y": 653.0
     }
 }
 
@@ -3025,7 +3025,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -3957,7 +3957,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -4211,7 +4211,7 @@
     "m_Title": "Dark Color",
     "m_Position": {
         "x": -2552.0,
-        "y": -892.0000610351563
+        "y": -892.0
     }
 }
 

@@ -42,6 +42,7 @@ MonoBehaviour:
   - RPC_TakeDamage
   - TakeDamage
   - SetDirection
+  - RPC_GiveWeapon
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
