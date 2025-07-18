@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviourPun
     public int maxHealth = 100;
     public int currentHealth;
 
+    public int healTime = 5;
+
     public Slider healthSlider;
 
     private void OnEnable()
@@ -23,19 +25,21 @@ public class PlayerHealth : MonoBehaviourPun
                 healthSlider.maxValue = maxHealth;
                 healthSlider.value = currentHealth;
             }
+            StartCoroutine(HealOverTime());
         }
     }
 
     public void TakeDamage(int damage)
     {
-        if (!photonView.IsMine)
+        if (photonView.Owner != null)
         {
-            photonView.RPC("RPC_TakeDamage", RpcTarget.AllBuffered, damage);
+            photonView.RPC("RPC_TakeDamage", photonView.Owner, damage);
         }
     }
 
+
     [PunRPC]
-    void RPC_TakeDamage(int damage)
+    public void RPC_TakeDamage(int damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -50,7 +54,8 @@ public class PlayerHealth : MonoBehaviourPun
         if (currentHealth <= 0)
         {
             Debug.Log("[" + photonView.Owner.NickName + "] Died");
-            Destroy(gameObject);
+            
+            PhotonNetwork.Destroy(gameObject);
             // Add death logic here
         }
     }
@@ -62,6 +67,24 @@ public class PlayerHealth : MonoBehaviourPun
         if (other.CompareTag("Enemy"))
         {
             TakeDamage(20);
+        }
+    }
+    
+    IEnumerator HealOverTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(healTime);
+            if(currentHealth<maxHealth)
+            {
+                currentHealth += 5;
+                currentHealth =Mathf.Clamp(currentHealth, 0, maxHealth);    
+
+                if(healthSlider!=null)
+                {
+                    healthSlider.value = currentHealth;
+                }
+            }
         }
     }
 }

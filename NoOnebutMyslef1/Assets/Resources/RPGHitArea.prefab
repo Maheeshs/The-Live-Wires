@@ -48,7 +48,9 @@ MonoBehaviour:
   radius: 5
   maxDamage: 50
   duration: 1.5
-  explosionForce: 500
+  explosionForce: 5
+  attackerGameObject: {fileID: 611765381044086543, guid: bf1e0b33559d713439adf1032e63328b,
+    type: 3}
 --- !u!1001 &3023467593977587553
 PrefabInstance:
   m_ObjectHideFlags: 0

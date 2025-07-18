@@ -1,6 +1,7 @@
+using Cinemachine;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviourPun
@@ -8,9 +9,10 @@ public class PlayerMovement : MonoBehaviourPun
     public float speed = 5f;
     public float sprintSpeed = 8f;
     public float jumpForce = 5f;
-    public float dashForce = 10f;
+  
     public LayerMask groundMask;
     public Transform groundCheck;
+    public CinemachineVirtualCamera playerCamera;
 
     private Rigidbody rb;
     private PlayerControls controls;
@@ -21,6 +23,11 @@ public class PlayerMovement : MonoBehaviourPun
     void Awake()
     {
         controls = new PlayerControls();
+        if (photonView.IsMine)
+        {
+            playerCamera = FindObjectOfType<CinemachineVirtualCamera>(true);
+           
+        }
 
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
@@ -29,7 +36,7 @@ public class PlayerMovement : MonoBehaviourPun
         controls.Player.Sprint.canceled += ctx => isSprinting = false;
 
         controls.Player.Jump.performed += ctx => Jump();
-        controls.Player.Dash.performed += ctx => Dash();
+    
     }
 
     void OnEnable()
@@ -49,6 +56,15 @@ public class PlayerMovement : MonoBehaviourPun
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
+        if (photonView.IsMine)
+        {
+            rb.isKinematic = false;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+        }
+        else
+        {
+            rb.isKinematic = true; // Non-owners must not simulate physics
+        }
 
     }
     
@@ -71,6 +87,12 @@ public class PlayerMovement : MonoBehaviourPun
     {
         Vector3 dir = transform.forward * moveInput.y + transform.right * moveInput.x;
         float moveSpeed = isSprinting ? sprintSpeed : speed;
+        
+        if (playerCamera != null)
+        {
+            float plFOV = isSprinting ? 80f : 60f;
+            playerCamera.m_Lens.FieldOfView = Mathf.Lerp(playerCamera.m_Lens.FieldOfView, plFOV, Time.deltaTime * 5);
+        }
 
         Vector3 velocity = dir * moveSpeed;
         velocity.y = rb.velocity.y;
@@ -84,13 +106,36 @@ public class PlayerMovement : MonoBehaviourPun
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
-    void Dash()
-    {
-        rb.AddForce(transform.forward * dashForce, ForceMode.Impulse);
-    }
+   
 
     void CheckGround()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, groundMask);
     }
+
+
+    [PunRPC]
+    public void ApplyExplosionForce(Vector3 explosionPos, float force, float radius, int damage)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.AddExplosionForce(force, explosionPos, radius, 1f, ForceMode.Impulse);
+        }
+
+       
+        
+            PlayerHealth health = GetComponent<PlayerHealth>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
+        
+
+        Debug.Log($"Explosion: {(photonView.IsMine ? "Local player, no damage" : "Opponent, took damage")}");
+    }
+
+
+
+
 }

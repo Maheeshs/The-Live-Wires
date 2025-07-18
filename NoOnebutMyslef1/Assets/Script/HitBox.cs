@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Photon.Pun;
 
-public class HitBox : MonoBehaviour
+public class HitBox : MonoBehaviourPun
 {
     public float radius = 3f;
     public int maxDamage = 50;
@@ -11,39 +10,24 @@ public class HitBox : MonoBehaviour
 
     private void Start()
     {
-        // Trigger damage immediately when spawned
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider col in hitColliders)
         {
-            Rigidbody rb = col.GetComponent<Rigidbody>();
-            if (rb != null || col.CompareTag("Player"))
-            {
-                Debug.Log("fu");
-                rb.AddExplosionForce(explosionForce, transform.position, radius);
-            }
             if (col.CompareTag("Player"))
             {
-                
-                float distance = Vector3.Distance(transform.position, col.transform.position);
-                float normalizedDistance = Mathf.Clamp01(distance / radius);
-                int damage = Mathf.RoundToInt(maxDamage * (1 - normalizedDistance));
-
-                PlayerHealth player = col.GetComponent<PlayerHealth>();
-                if (player != null)
+                PhotonView targetView = col.GetComponent<PhotonView>();
+                if (targetView != null)
                 {
-                    player.TakeDamage(damage);
-                    Debug.Log($"Player hit with {damage} damage at distance {distance:F2}");
+                    float distance = Vector3.Distance(transform.position, col.transform.position);
+                    float normalizedDistance = Mathf.Clamp01(distance / radius);
+                    int damage = Mathf.RoundToInt(maxDamage * (1 - normalizedDistance));
+
+                    // RPC sent to all — logic inside will skip damage for local owner
+                    targetView.RPC("ApplyExplosionForce", RpcTarget.All, transform.position, explosionForce, radius, damage);
                 }
             }
         }
 
         Destroy(gameObject, duration);
-    }
-
-    // 🔴 Draw Gizmos in Scene view when object is selected
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = new Color(1f, 0f, 0f, 0.4f); // Semi-transparent red
-        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
