@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviourPun
 {
@@ -10,10 +11,17 @@ public class WeaponManager : MonoBehaviourPun
     public GameObject RPG;
     public GameObject Sword;
 
-    private WeaponType currentWeapon= WeaponType.GrenadeLauncher;
+    public Slider ammoSlider;
+
+    private WeaponType currentWeapon = WeaponType.GrenadeLauncher;
 
     void Start()
     {
+        if (photonView.IsMine)
+        {
+            ammoSlider = GameObject.Find("AmmoSlider")?.GetComponent<Slider>();
+            EquipWeapon(WeaponType.GrenadeLauncher);
+        }
         if (!photonView.IsMine)
         {
             enabled = false;
@@ -42,9 +50,35 @@ public class WeaponManager : MonoBehaviourPun
                 break;
         }
     }
+    public void SwitchToDefaultGun()
+    {
+        Sword.SetActive(false);
+        RPG.SetActive(false);
+        GrenadeLauncher.SetActive(true);
+    }
+
+
     [PunRPC]
     public void RPC_GiveWeapon(int weaponIndex)
     {
-        EquipWeapon((WeaponType)weaponIndex);
+        if ((WeaponType)weaponIndex == WeaponType.RPG)
+        {
+            // Enable RPG and disable other weapons
+            RPGfire rpgFire = RPG.GetComponentInChildren<RPGfire>();
+            if (rpgFire != null)
+            {
+                rpgFire.photonView.RPC("RPC_RefillRPGAmmo", RpcTarget.All);
+            }
+        }
+        if ((WeaponType)weaponIndex == WeaponType.Sword)
+        {
+
+            // Enable RPG and disable other weapons
+            SwordAttack swordAttack = Sword.GetComponentInChildren<SwordAttack>();
+            if (swordAttack != null)
+            {
+                swordAttack.photonView.RPC("RPC_RefillRPGAmmo", RpcTarget.All);
+            }
+        }
     }
 }

@@ -211,6 +211,7 @@ MonoBehaviour:
   GrenadeLauncher: {fileID: 5504737224655652004}
   RPG: {fileID: 3447803732819042765}
   Sword: {fileID: 5897736863377547764}
+  ammoSlider: {fileID: 0}
 --- !u!114 &4980917341267111847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +775,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2528873653435192494}
+    - targetCorrespondingSourceObject: {fileID: 447880580657507398, guid: 0eef8e65a6d01f64d9b143f307fed8b7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 439179617927188940}
   m_SourcePrefab: {fileID: 100100000, guid: 0eef8e65a6d01f64d9b143f307fed8b7, type: 3}
 --- !u!4 &2635414570914659191 stripped
 Transform:
@@ -827,7 +832,31 @@ MonoBehaviour:
   BulletSpawnpoint: {fileID: 6743865397975746032}
   RPG: {fileID: 3447803732819042765}
   DefualtGun: {fileID: 5504737224655652004}
+  Sword: {fileID: 5897736863377547764}
   maxAmmo: 3
+  currentAmmo: 0
+--- !u!114 &439179617927188940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2679456959234453722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3447803732819042765 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0eef8e65a6d01f64d9b143f307fed8b7,
@@ -1182,6 +1211,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5866977843244941221}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 494da961f38a4c140bc9315f12d22f05,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7040194524472723156}
   m_SourcePrefab: {fileID: 100100000, guid: 494da961f38a4c140bc9315f12d22f05, type: 3}
 --- !u!4 &7125201021556199635 stripped
 Transform:
@@ -1232,7 +1265,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sword: {fileID: 5897736863377547764}
   DefualtGun: {fileID: 5504737224655652004}
+  RPG: {fileID: 3447803732819042765}
   maxAmmo: 10
   anim: {fileID: 5244329690029800864}
   damage: 20
   swordCollider: {fileID: 3174113344321467037}
+  currentAmmo: 0
+--- !u!114 &7040194524472723156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7613929149445163625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

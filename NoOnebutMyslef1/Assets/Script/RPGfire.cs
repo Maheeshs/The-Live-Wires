@@ -9,10 +9,11 @@ public class RPGfire : MonoBehaviourPun
     public Transform BulletSpawnpoint;
     public GameObject RPG;
     public GameObject DefualtGun;
+    public GameObject Sword;
 
     private PlayerControls controls;
     public int maxAmmo = 3;
-    private int currentAmmo;
+    public int currentAmmo;
 
 
     private void Awake()
@@ -47,15 +48,38 @@ public class RPGfire : MonoBehaviourPun
             return;
         if (currentAmmo <= maxAmmo)
         {
+            Debug.Log(currentAmmo);
             Shoot();
             currentAmmo--;
-            if(currentAmmo == 0)
+            currentAmmo = Mathf.Clamp(currentAmmo, 0, maxAmmo);
+
+            UpdateAmmoUI();
+            if (currentAmmo == 0)
             {
+
                 RPG.SetActive(false);
                 DefualtGun.SetActive(true);
+                currentAmmo = maxAmmo;
+                GetComponent<WeaponManager>()?.SwitchToDefaultGun();
             }
         }
     }
+    [PunRPC]
+    public void RPC_RefillRPGAmmo()
+    {
+        currentAmmo = maxAmmo;
+        Debug.Log("RPG Ammo Refilled: " + currentAmmo);
+
+        // Reactivate RPG if it was inactive
+        if (!RPG.activeSelf)
+        {
+            RPG.SetActive(true);
+            Sword.SetActive(false);
+            DefualtGun.SetActive(false);
+        }
+        UpdateAmmoUI(); 
+    }
+
 
     void Shoot()
     {
@@ -65,5 +89,19 @@ public class RPGfire : MonoBehaviourPun
         RPGbullet.GetComponent<PhotonView>().RPC("SetDirection", RpcTarget.All, shootDirection);
 
         Destroy(RPGbullet, 3f);
+    }
+    
+    public void UpdateAmmoUI()
+    {
+        if (photonView.IsMine)
+        {
+            WeaponManager wm = FindObjectOfType<WeaponManager>();
+            if (wm != null && wm.ammoSlider != null)
+            {
+                Debug.Log("ammo");
+                wm.ammoSlider.maxValue = maxAmmo;
+                wm.ammoSlider.value = currentAmmo;
+            }
+        }
     }
 }

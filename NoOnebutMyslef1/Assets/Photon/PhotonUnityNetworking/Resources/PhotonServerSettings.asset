@@ -44,6 +44,9 @@ MonoBehaviour:
   - SetDirection
   - RPC_GiveWeapon
   - ApplyExplosionForce
+  - RPC_DeactivatePickup
+  - RPC_ReenablePickup
+  - RPC_RefillRPGAmmo
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
