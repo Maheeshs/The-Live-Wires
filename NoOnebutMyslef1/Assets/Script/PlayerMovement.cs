@@ -135,6 +135,13 @@ public class PlayerMovement : MonoBehaviourPun
         Debug.Log($"Explosion: {(photonView.IsMine ? "Local player, no damage" : "Opponent, took damage")}");
     }
 
+    [PunRPC]
+    void RPC_SetActive(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+    }
+
+
 
 
 

@@ -196,6 +196,8 @@ MonoBehaviour:
   currentHealth: 0
   healTime: 5
   healthSlider: {fileID: 0}
+  respawnUIPrefab: {fileID: 2415063001487688540, guid: 90111848ab1d8024f83e5c23fbe46ef8,
+    type: 3}
 --- !u!114 &5013252553397569798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,12 +703,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0eef8e65a6d01f64d9b143f307fed8b7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.404
+      value: -0.574
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0eef8e65a6d01f64d9b143f307fed8b7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.134
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0eef8e65a6d01f64d9b143f307fed8b7,
         type: 3}
@@ -874,17 +876,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6d648a258460ed443ac397b83cd44820,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.45923552
+      value: 0.459
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d648a258460ed443ac397b83cd44820,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.49225307
+      value: -0.597
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d648a258460ed443ac397b83cd44820,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.14461248
+      value: -0.148
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d648a258460ed443ac397b83cd44820,
         type: 3}

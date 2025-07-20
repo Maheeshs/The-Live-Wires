@@ -1,4 +1,4 @@
-using Photon.Pun;
+﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +12,9 @@ public class PlayerHealth : MonoBehaviourPun
     public int healTime = 5;
 
     public Slider healthSlider;
+
+    public GameObject respawnUIPrefab; // Assign in Inspector
+    private GameObject currentRespawnUI;
 
     private void OnEnable()
     {
@@ -54,8 +57,13 @@ public class PlayerHealth : MonoBehaviourPun
         if (currentHealth <= 0)
         {
             Debug.Log("[" + photonView.Owner.NickName + "] Died");
-            
-            PhotonNetwork.Destroy(gameObject);
+            if (photonView.IsMine)
+            {
+                gameObject.SetActive(false);
+                ShowRespawnUI();
+            }   
+
+            //PhotonNetwork.Destroy(gameObject);
             // Add death logic here
         }
     }
@@ -87,4 +95,35 @@ public class PlayerHealth : MonoBehaviourPun
             }
         }
     }
+
+    void ShowRespawnUI()
+    {
+        
+            if (currentRespawnUI != null)
+            {
+                Destroy(currentRespawnUI); // In case it's already spawned
+            }
+
+            GameObject canvas = GameObject.Find("RCanvas"); // Must exist in scene
+
+           
+
+            currentRespawnUI = Instantiate(respawnUIPrefab, canvas.transform);
+
+            RespawnUI respawnUI = currentRespawnUI.GetComponent<RespawnUI>();
+            if (respawnUI != null)
+            {
+                //gameObject.SetActive(false);
+                respawnUI.StartRespawn(this.gameObject);
+
+            }
+            else
+            {
+                Debug.LogError("RespawnUI script not found on the prefab.");
+            }
+        
+
+    }
+
+
 }
