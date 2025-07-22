@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 2
+  Delay: 30
 --- !u!1 &386414964
 GameObject:
   m_ObjectHideFlags: 0

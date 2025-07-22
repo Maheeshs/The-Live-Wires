@@ -163,6 +163,8 @@ MonoBehaviour:
     m_Bits: 8
   groundCheck: {fileID: 873470057056202685}
   playerCamera: {fileID: 6700346104232431419}
+  DustPrefab: {fileID: 6301958121640631987, guid: 43fa08664e68c9940996874ddd21466b,
+    type: 3}
 --- !u!114 &8175511092802186130
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,11 +14,14 @@ public class PlayerMovement : MonoBehaviourPun
     public Transform groundCheck;
     public CinemachineVirtualCamera playerCamera;
 
+    public GameObject DustPrefab;
+
     private Rigidbody rb;
     private PlayerControls controls;
     private Vector2 moveInput;
     private bool isSprinting;
     private bool isGrounded;
+    private bool wasGroundedLastFrame = true;
 
     void Awake()
     {
@@ -75,6 +78,12 @@ public class PlayerMovement : MonoBehaviourPun
     {
         if (!photonView.IsMine) return;
         CheckGround();
+        if (!wasGroundedLastFrame && isGrounded)
+        {
+            SpawnDustEffect(); 
+        }
+
+        wasGroundedLastFrame = isGrounded;
     }
 
     void FixedUpdate()
@@ -103,7 +112,12 @@ public class PlayerMovement : MonoBehaviourPun
     void Jump()
     {
         if (isGrounded)
+        {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            SpawnDustEffect();
+        }
+            
+
     }
 
    
@@ -141,7 +155,12 @@ public class PlayerMovement : MonoBehaviourPun
         gameObject.SetActive(isActive);
     }
 
-
+    void SpawnDustEffect()
+    {
+        Instantiate(DustPrefab, groundCheck.position, Quaternion.Euler(90,0,0));
+        
+        Debug.Log("Dust Spawned");
+    }
 
 
 

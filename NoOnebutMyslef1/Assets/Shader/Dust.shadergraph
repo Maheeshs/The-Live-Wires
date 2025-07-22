@@ -1122,8 +1122,8 @@
     "m_ObjectId": "18b128b32c4f49c08722556bf2e308d4",
     "m_Title": "Fire Color",
     "m_Position": {
-        "x": -2759.999755859375,
-        "y": 652.999755859375
+        "x": -2760.0,
+        "y": 653.0000610351563
     }
 }
 
@@ -4041,7 +4041,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -4210,8 +4210,8 @@
     "m_ObjectId": "bdc4394790aa4311a05c4da3f35c70ea",
     "m_Title": "Dark Color",
     "m_Position": {
-        "x": -2551.99951171875,
-        "y": -892.0
+        "x": -2552.0,
+        "y": -891.9998779296875
     }
 }
 
