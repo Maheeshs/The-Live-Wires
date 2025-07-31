@@ -9,7 +9,10 @@ public class PlayerMovement : MonoBehaviourPun
     public float speed = 5f;
     public float sprintSpeed = 8f;
     public float jumpForce = 5f;
-  
+
+    public Transform playerBody;
+
+
     public LayerMask groundMask;
     public Transform groundCheck;
     public CinemachineVirtualCamera playerCamera;
@@ -94,7 +97,8 @@ public class PlayerMovement : MonoBehaviourPun
 
     void Move()
     {
-        Vector3 dir = transform.forward * moveInput.y + transform.right * moveInput.x;
+        Vector3 dir = playerBody.forward * moveInput.y + playerBody.right * moveInput.x;
+
         float moveSpeed = isSprinting ? sprintSpeed : speed;
         
         if (playerCamera != null)
@@ -157,7 +161,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     void SpawnDustEffect()
     {
-        Instantiate(DustPrefab, groundCheck.position, Quaternion.Euler(90,0,0));
+        PhotonNetwork.Instantiate("Dustparticle", groundCheck.position, Quaternion.Euler(90,0,0));
         
         Debug.Log("Dust Spawned");
     }

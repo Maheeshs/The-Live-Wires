@@ -140,6 +140,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemSlot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3537330212831130345, guid: dd56e8633eb695347b477fff4ce1d324,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4205464553581848659, guid: dd56e8633eb695347b477fff4ce1d324,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2756,7 +2761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &748636904
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3243,7 +3248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &970051792
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -37604,6 +37609,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ItemSlot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537330212831130345, guid: dd56e8633eb695347b477fff4ce1d324,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4205464553581848659, guid: dd56e8633eb695347b477fff4ce1d324,
         type: 3}

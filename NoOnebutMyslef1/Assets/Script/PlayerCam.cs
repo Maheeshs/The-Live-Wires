@@ -31,7 +31,7 @@ public class PlayerCam : MonoBehaviourPun
             Cursor.lockState = CursorLockMode.Locked;
 
             // Find any CM vCam in scene (can be refined if needed)
-            playerCamera = FindObjectOfType<CinemachineVirtualCamera>(true);
+            //playerCamera = FindObjectOfType<CinemachineVirtualCamera>(true);
 
             if (playerCamera != null)
             {
